@@ -5,27 +5,44 @@ package com.eb.moneys;
  */
 public class Money {
     protected int amount;
+    private String currency;
 
-    public Money(int amount) {
+    public static Money dollar(int amount) {
+        return new Money(amount, "USD");
+    }
+
+    public static Money franc(int amount) {
+        return new Money(amount, "CHF");
+    }
+
+    public Money(int amount, String currency) {
         this.amount = amount;
+        this.currency = currency;
+    }
+
+    public String currency() {
+        return currency;
     }
 
     public Money times(int multipliers) {
-        return new Money(amount * multipliers);
+        return new Money(amount * multipliers, currency);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || false == o instanceof Money) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Money money = (Money) o;
 
-        return amount == money.amount;
+        if (amount != money.amount) return false;
+        return currency != null ? currency.equals(money.currency) : money.currency == null;
     }
 
     @Override
     public int hashCode() {
-        return amount;
+        int result = amount;
+        result = 31 * result + (currency != null ? currency.hashCode() : 0);
+        return result;
     }
 }
