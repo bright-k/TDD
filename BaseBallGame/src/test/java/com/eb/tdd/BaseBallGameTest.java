@@ -3,8 +3,7 @@ package com.eb.tdd;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
@@ -32,7 +31,7 @@ public class BaseBallGameTest {
             ex = goe;
         }
 
-        assertTrue(ex instanceof GameOverException);
+        assertThat(ex).isInstanceOf(GameOverException.class);
     }
 
     @Test
@@ -51,8 +50,7 @@ public class BaseBallGameTest {
 
     private void assertGuestScore(int guess, int strike, int ball) {
         Score score = game.guess(guess);
-        assertThat(strike, equalTo(score.strike()));
-        assertThat(ball, equalTo(score.ball()));
+        assertThat(score).isEqualTo(new Score(strike, ball));
     }
 
 }
