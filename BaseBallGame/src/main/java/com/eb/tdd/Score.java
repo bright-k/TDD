@@ -37,4 +37,12 @@ public class Score {
         result = 31 * result + ball;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "strike=" + strike +
+                ", ball=" + ball +
+                '}';
+    }
 }
